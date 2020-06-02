@@ -1,0 +1,26 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "command": "npm",
+    "tasks": [
+        {
+            "label": "Build the project",
+            "type": "npm",
+            "script": "start build",
+            "problemMatcher": ["$tsc"]
+        },
+        {
+            "label": "Run the linter",
+            "type": "npm",
+            "script": "start lint",
+            "problemMatcher": ["$eslint-stylish"]
+        },
+        {
+            "label": "Run the tests",
+            "type": "npm",
+            "script": "start test",
+            "problemMatcher": []
+        }
+    ]
+}
