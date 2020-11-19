@@ -1,13 +1,13 @@
-import { test, expect } from '@jest/globals';
+import { GBB, Board, CellLocation, BoardInfo, CellInfo } from '../src/index';
 
-import { GBB, CellLocation, BoardInfo, CellInfo, Board } from '../src/index';
-
-const u = (board: Board) => GBB.unparse(board);
+export const p = (str: string) => () => GBB.parse(str);
+export const u = (board: Board) => GBB.stringify(board);
 
 const emptyCell = () => {
     return { a: 0, n: 0, r: 0, v: 0 };
 };
-const buildBoardOf = (
+
+export const buildBoardOf = (
     width: number,
     height: number,
     cells?: Array<{ at: CellLocation; with: CellInfo }>
@@ -24,5 +24,3 @@ const buildBoardOf = (
     }
     return board;
 };
-
-test.todo('We should write tests here');

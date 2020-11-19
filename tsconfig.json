@@ -1,9 +1,17 @@
 {
     "compilerOptions": {
-        "outDir": "./dist",
-        "allowJs": true,
         "target": "es5",
-        "esModuleInterop": true
+        "rootDir": "./src",
+        "esModuleInterop": true,
+        "allowJs": true,
+        "sourceMap": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "declarationDir": "dist/typings",
+        "resolveJsonModule": true,
+        "stripInternal": true
+
     },
     "include": [
         "./src/**/*"

@@ -1,10 +1,11 @@
 # gobstones-gbb-parser
 
-A Gobstones Board Parser and Unparser.
+A Gobstones Board Parser and Stringifier.
 
 ## Gobstones Board Language Specification
 
-The Gobstones Board Language is a language for specifying boards for the Gobstones Language. The language follows the following EBNF spec:
+The Gobstones Board Language is a declarative language for specifying boards for the Gobstones Language.
+The language follows the following EBNF spec:
 
 ```
 Main ->	FormatDeclaration __
@@ -77,11 +78,13 @@ Some additional considerations include:
 
 ## Gobstones Board JSON Output/Input
 
-The parsed result produced/consumed by the parser is the same format produced/consumed by the gobstones-interpreter. It's a TypeScript/JavaScript object that has the Board type. where:
+The parsed result produced/consumed by the parser is the same format produced/consumed by the
+[gobstones-interpreter](https://github.com/gobstones/gobstones-interpreter). It's a
+TypeScript/JavaScript object that has the Board type. where:
 
-```
+```typescript
 type Board = {
-    format: string;     // should be always "GBB/1.0"
+    format: string;     // should always be "GBB/1.0"
     width: number;      // width of the board
     height: number;     // height of the board
     head: CellLocation; // array [x, y] with the position of the head 
@@ -95,57 +98,62 @@ type Board = {
                         //   * board[x][y].v = number of green stones at (x, y)
 };
 type CellLocation = [number, number];
-type BoardInfo = Array<Array<CellInfo>>;
+type BoardInfo = CellInfo[][];
 type CellInfo = { a: number; n: number; r: number; v: number };
 ```
 
-Parsing may also produce errors which include:
+Parsing may also produce errors which live in the GBBParsingErrors namespace (when parsing) or GBBStringifyingErrors (when stringifying).
 
-```
-UnexpectedTokenError    // If an invalid token is found in the string,
-UnexpectedEOFError      // If the EOF is reached but a valid board could not yet be produced.
-InvalidSizeDefinition   // If the size is zero in any of their components.
-HeadBoundaryExceeded    // If the head position exceeds the size of the board.
-DuplicateCellError      // If there is more than one definition for the same cell.
-DuplicateColorError     // If there is more than one definition for the same color in any given cell.
-CellBoundaryExceeded    // If for any given cell declaration the coordinates exceeds the size of the board.
+When parsing a given string for a GBB definition you may find:
+
+```typescript
+GBBParsingErrors.UnexpectedToken           // If an invalid token is found in the string,
+GBBParsingErrors.UnexpectedEOF             // If the EOF is reached but a valid board could not yet be produced.
+GBBParsingErrors.InvalidSizeDefinition     // If the size is zero in any of their components.
+GBBParsingErrors.HeadBoundaryExceeded      // If the head position exceeds the size of the board.
+GBBParsingErrors.DuplicatedCellDefinition  // If there is more than one definition for the same cell.
+GBBParsingErrors.DuplicatedColorDefinition // If there is more than one definition for the same color in any given cell.
+GBBParsingErrors.CellBoundaryExceeded     // If for any given cell declaration the coordinates exceeds the size of the board.
 ```
 
-These all inherit from `GBBParsingError`.
+These all inherit from `GBBParsingErrors.GBBParsingError`.
 
 Unparsing on the other hand may produce similar errors if the provided
 object contains errors that makes it an invalid board. These include:
 
-```
-InvalidSizeDefinition   // If the size is zero or negative in any of their components.
-HeadBoundaryExceeded    // If the head position exceeds the size of the board.
-CellBoundaryExceeded    // If for any given cell declaration the coordinates exceeds the size of the board.
-InvalidCellDefinition      // If the data for the stones in a cell
-are incomplete or contains more info than needed.
-InvalidBoardDefinition     // If the board information provided does not match width and height of the board.
+```typescript
+GBBStringifyingErrors.InvalidSizeDefinition       // If the size is zero or negative in any of their components.
+GBBStringifyingErrors.HeadBoundaryExceeded        // If the head position exceeds the size of the board.
+GBBStringifyingErrors.InvalidCellDefinition       // If the data for the stones in a cell are incomplete or contains more info than needed.
+GBBStringifyingErrors.InvalidBoardDefinition      // If the board information provided does not match width and height of the board.
 ```
 
-This all inherit from `GBBUnparsingError`.
+This all inherit from `GBBStringifyingErrors.GBBStringifyingError`.
+
+## Translations
+
+Error messages are translated to the user desired language, although this does not change the language
+definition in any way. See below on how to translate error messages to a given language.
 
 ## Installing
 
 To install run
 
-```
-npm install gobstones-gbb-parser
+```sh
+npm install @gobstones/gobstones-gbb-parser
 ```
 
 or if you are using yarn.
 
-```
-yarn add gobstones-gbb-parser
+```sh
+yarn add @gobstones/gobstones-gbb-parser
 ```
 
-## Usage
+## Usage as a module
 
-Import GBBParser from the module and parse a string defining a Gobstones Board.
+Import `GBB` from the module and parse a string defining a Gobstones Board.
 
-```
+```typescript
 import { GBB } from 'gobstones-gbb-parser';
 
 const myBoard = "GBB/1.0 size 3 4 cell 2 1 a 1 cell 1 2 n 1 r 3 cell 1 3 r 2 a 1 head 1 1";
@@ -157,8 +165,9 @@ console.log(BoardObject)
 
 The output of the parser is a JSON output with the aforementioned spec.
 You could also pass the object representing a Board and produce a GBB string
+by calling `stringify`, as follows:
 
-```
+```typescript
 import { GBB } from 'gobstones-gbb-parser';
 
 const myBoardObject = {
@@ -173,9 +182,88 @@ const myBoardObject = {
     ]
 }
 
-const GBBBoardString = GBB.unparse(myBoard);
+const GBBBoardString = GBB.stringify(myBoard);
 
 console.log(GBBBoardString)
+```
+
+#### Passing options
+
+You can pass an object of type `GBBParsingOptions` to `parse` to specify additional options as a second argument.
+
+```typescript
+interface GBBParsingOptions = {
+    /** The error message output language */
+    language: Locale;
+}
+```
+
+Whereas for `stringify` you can pass a `GBBStringifyingOptions` as a second argument.
+
+```typescript
+interface GBBStringifyingOptions {
+    /** The error message output language */
+    language: Locale;
+    /** Different separator options */
+    separators: {
+        /** The separator to use between each language keyword.
+         * Defaults to 'newline' */
+        betweenKeywords: WhiteWithNewlineOption;
+        /** The separator to use between different color names in the same line.
+         * Defaults to 'space' */
+        betweenColors: WhiteOption;
+        /** The separator to use between a color name and the number that follows.
+         * Defaults to 'tab' */
+        colorKeyToNumber: WhiteOption;
+        /** The separator to use between different elements of a coordinate.
+         * Defaults to 'space' */
+        betweenCoordinates: WhiteOption;
+        /** The separator to use between the keyword and the first element of a coordinate.
+         * Defaults to 'space' */
+        keywordToCoordinates: WhiteOption;
+    };
+    /** Use the full color name in output. Defaults to 'true' */
+    useFullColorNames: boolean;
+    /** Maintain the color key for colors which have zero stone for cells
+     * which have at least one stone. Defaults to 'false' */
+    declareColorsWithZeroStones: boolean;
+    /** Maintain the color key for colors which have zero stone for cells
+     * even for cells that have no stones at all. This indeed produces a
+     * 'cell' line for each cell of the board, which is not desirable for
+     * large board. Defaults to 'false' */
+    declareColorsWithAllZeroStones: boolean;
+}
+
+type WhiteOption = 'space' | 'tab';
+type WhiteWithNewlineOption = 'space' | 'tab' | 'newline';
+```
+
+where you can configure the produced output string when unparsing, but specifying different separator symbols,
+choose to use full color names or short names, and maintain or remove empty color names and cells.
+
+Available locales are currently `en` and `es`, and defaults to 'en'.
+
+```typescript
+type Locale = 'en' | 'es'; // Defaults to 'en'.
+```
+## Usage as CLI
+
+This module installs a `gobstones-gbb-parser` command in the NPM bin folder. You can use the parser from the
+command line. If you want to use it from anywhere on your machine, install the module globally with:
+
+```sh
+npm install --global @gobstones/gobstones-gbb-parser
+```
+
+Then you can call the parser with the version option to check the currently installed version.
+
+```
+gobstones-gbb-parser --version
+```
+
+Use help to chek available commands.
+```
+gobstones-gbb-parser --help
 ```
 
 ## Modifying and compiling
@@ -183,13 +271,13 @@ console.log(GBBBoardString)
 If you want to modify the code, just download the project with git
 
 ```
-git clone <repo>
+git clone https://github.com/gobstones/gobstones-gbb-parser
 cd gobstones-gbb-parser
 ```
 
 You may compile the project with
 ```
-npm run build
+npm start build
 ```
 
 which produces the output in the `dist` directory.
@@ -201,34 +289,34 @@ npm test
 
 ## Minimal source code guide
 
-The project uses mainly a parser generated by `nearley` parser, whose spec
-you may find in `src/gbb-grammar.ne`. The code in that file is mostly self
-explanatory and follows the EBNF spec of the language, with additional code used by nearly to produce the expected output and validate.
+The project structre is as follows:
+```
+src
+ |- grammar       // Lexer and Parser definitions
+ |- parser        // Parsing functions, models and error definitions
+ |- stringifier   // Stringify functions, models and error definitions
+ |- helpers       // Helper functions and definitions
+ |- translations  // JSON files containing translation strings
+ |- models.ts     // The exported types for the module
+ |- models.ts     // Some defaults the module exports
+ |- index.ts      // The main exported module, including the GBB object
+ |- cli.ts        // The CLI definition
+```
+The project uses mainly a lexer/tokenizer written using [moo](https://github.com/no-context/moo) that you can
+find in `src/grammar/gbb-lexer.js` and a parser generated by [nearley](https://nearley.js.org) parser, whose spec
+you may find in `src/grammar/gbb-grammar.ne`. The code in that file is mostly self explanatory and follows the
+EBNF spec of the language, with additional code used by nearley to produce an intermediate output.
 
-The output of the grammar produces an intermediate AST which is managed by `src/gbs-parser.ts`. This files exports the `parse` function, that
-validates the consistency of data and produces a ready for interpreter consumption object.
+The output of the grammar produces an intermediate AST which is managed by `src/parser/parser.ts`.
+This files exports the `parse` function, that validates the consistency of data and produces a ready for
+interpreter consumption object.
 
-On the other hand `src/gbs-unparser.ts` exports the `unparse` function,
-that takes an object and produces a GBB format string.
+On the other hand `src/stringifier/stringifier.ts` exports the `stringify` function, that takes an object and
+produces a GBB format string.
 
 Other files include the definition of types for Board, CellInfo and other
-utilities, as well as errors for parse and unparse.
+utilities, as well as errors for parse and stringify.
 
 Everything is then wrapped up by the `src/index.js` file that exports
 all defined types and a `GBB` object which the aforementioned functions 
-`parse` and `unparse`.
-
-## TODO
-
-Here's a list of nice TODO's for the project
-
-* Add tests for errors when unparsing
-* Add tests that check behavior of option flags in parse/unparse
-* Configure travis.ci to run the test in any push to master
-* Modify the run script so test run lint before anything
-* Document the different options that may be passed to parse/unparse and their expected behavior
-* Create a CHANGELOG file to track down the changes
-* Configure .github folder so any pull request/etc. has a template
-* Tidy up the code and add comments where needed.
-* Link to other projects in this README.
-* Publish the module in NPM or GitHub's NPM repo.
+`parse` and `stringify`, types, and defaults.
