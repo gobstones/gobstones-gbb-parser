@@ -1,0 +1,23 @@
+{
+    "parser": {
+        "errors": {
+            "cell_boundary_exceeded": "The definition for ${coordinate} in cell definition for ${x} ${y} at line ${line}, column ${column} is invalid, as it falls outside of the board.",
+            "duplicate_cell_definition": "La definición de la celda ${x} ${y} se encontró dos veces. La primera en la línea ${lineFirstAppearance}, columna ${colFirstAppearance} y nuevamente en la línea ${lineSecondAppearance}, columna ${colSecondAppearance}.",
+            "duplicate_color_definition": "La definición para el color ${color} de la celda ${x} ${y} se declara dos veces. La primera vez en la línea ${lineFirstAppearance}, columna ${colFirstAppearance} y nuevamente en la línea ${lineSecondAppearance}, columna ${colSecondAppearance}.",
+            "head_boundary_exceeded": "The head position falls outside of the board. The ${coordinate} is declared as ${coordinateValue} at line ${coordinateLine} column ${coordinateCol}, but it cannot be grater than the ${dimension} of the board which is declared as ${dimensionValue} at line ${dimensionLine} column ${dimensionCol}.",
+            "invalid_size_definition": "La ${dimension} del tablero no puede ser cero. Error en la línea ${line}, columna ${col}.",
+            "unexpected_eof": "Llegamos al final del archivo, pero todavía hay datos que son requeridos. ¿Está seguro de estar pasando el contenido del archivo completo?",
+            "unexpected_token": "Se encontró un carater inválido en la línea ${lineNumber}, columna ${columnNumber}:\n${lineText}\n${lineMarker}"
+        },
+        "keywords": {
+            "width": "ancho",
+            "height": "alto",
+            "x-coordinate": "coordenada X",
+            "y-coordinate": "coordenada Y",
+            "a": "Azul",
+            "n": "Negro",
+            "r": "Rojo",
+            "v": "Verde"
+        }
+    }
+}
