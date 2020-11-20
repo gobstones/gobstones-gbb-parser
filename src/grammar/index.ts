@@ -1,7 +1,7 @@
-import Grammar from '../grammar/gbb-grammar';
+import gbbGrammar from './gbb-grammar';
 import Lexer from './gbb-lexer';
 
-export const grammar = Grammar;
+export const grammar = gbbGrammar;
 
 export const lexer = Lexer;
 
