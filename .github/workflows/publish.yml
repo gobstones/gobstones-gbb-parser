@@ -1,4 +1,4 @@
-name: Publish to NPM and GitHub
+name: CI - Publish to NPM
 on:
     release:
         types: [created]
