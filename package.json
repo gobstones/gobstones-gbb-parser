@@ -1,6 +1,6 @@
 {
   "name": "@gobstones/gobstones-gbb-parser",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A Parser/Unparser for GBB (Gobstones Board) file format",
   "repository": "https://github.com/gobstones/gobstones-gbb-parser",
   "author": "Alan Rodas Bonjour <alanrodas@gmail.com>",
