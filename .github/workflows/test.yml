@@ -10,6 +10,7 @@ on:
             - dev
 jobs:
     test:
+        name: Run tests
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -18,7 +19,7 @@ jobs:
                     - 14.x
         steps:
             - uses: actions/checkout@v2
-              name: Use Node.js ${{ matrix.node-version }}
+              name: Run tests using Node.js ${{ matrix.node-version }}
             - uses: actions/setup-node@v1
               with:
                   node-version: "${{ matrix.node-version }}"

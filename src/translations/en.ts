@@ -71,7 +71,7 @@ export const en: Locale = {
         errors: {
             language:
                 'You specified "${lang}" as the language, but that\'s not a valid language. Select one of ${availableLangs}.',
-            file: 'The file ${fileName} does not exist or cannot be read.',
+            file: 'The file ${fileName} does not exist or cannot be read.'
         }
     }
 };

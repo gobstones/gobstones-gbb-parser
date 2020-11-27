@@ -1,6 +1,6 @@
 {
   "name": "@gobstones/gobstones-gbb-parser",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A Parser/Stringifier for GBB (Gobstones Board) file format",
   "repository": "https://github.com/gobstones/gobstones-gbb-parser",
   "author": "Alan Rodas Bonjour <alanrodas@gmail.com>",

@@ -73,8 +73,7 @@ export namespace GBBStringifyingErrors {
             const secondaryMessage = intl.translate(secondaryMessageKey, values);
             super(
                 'InvalidBoardDefinition',
-                intl.translate('stringifier.errors.InvalidBoardDefinition.main') +
-                    secondaryMessage
+                intl.translate('stringifier.errors.InvalidBoardDefinition.main') + secondaryMessage
             );
             Object.setPrototypeOf(this, InvalidBoardDefinition.prototype);
         }

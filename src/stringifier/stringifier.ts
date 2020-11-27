@@ -72,12 +72,7 @@ const stringifyBoardWith = (
     );
     ensureOrFail(
         board.head[0] >= 0 && board.head[0] < board.width,
-        new GBBStringifyingErrors.HeadBoundaryExceeded(
-            'xCoordinate',
-            board.head[0],
-            0,
-            board.width
-        )
+        new GBBStringifyingErrors.HeadBoundaryExceeded('xCoordinate', board.head[0], 0, board.width)
     );
     ensureOrFail(
         board.head[1] >= 0 && board.head[1] < board.height,

@@ -31,12 +31,11 @@ export const es: Locale = {
                     "La definición de una celda debe contener valores para 'a', 'n', 'r' and 'v', y nada más. ",
                 missing:
                     'Te está faltando un valor para la clave ${key} para la definición de la celda en la posición ${x}, ${y}.',
-                added:
-                    'Aún así hay claves adicionales para la posición ${x}, ${y}.'
+                added: 'Aún así hay claves adicionales para la posición ${x}, ${y}.'
             },
             InvalidBoardDefinition: {
                 main:
-                    "La cantidad de elementos en el arreglo de la definición de board debe coincidir con el ancho y alto definido para el tablero en cada uno de sus elementos",
+                    'La cantidad de elementos en el arreglo de la definición de board debe coincidir con el ancho y alto definido para el tablero en cada uno de sus elementos',
                 width:
                     'Sin embargo el arreglo tiene ${encountered} elementos, mientras que el ancho indica que ${declared} como requerido.',
                 height:
