@@ -1,4 +1,4 @@
-import { LocaleName, defaultLocale } from '../translations';
+import { intl } from '../translations';
 
 export interface TokenInfo<T> {
     type: string;
@@ -11,7 +11,8 @@ export interface TokenInfo<T> {
 }
 
 export interface ParsedBoardCell {
-    at: [TokenInfo<number>, TokenInfo<number>];
+    x: TokenInfo<number>;
+    y: TokenInfo<number>;
     declaring: {
         color: TokenInfo<string>;
         value: TokenInfo<number>;
@@ -31,9 +32,9 @@ export interface ParsedBoardInfo {
  */
 export interface GBBParsingOptions {
     /** The error message output language */
-    language: LocaleName;
+    language: string;
 }
 
 export const defaultGBBParsingOptions: GBBParsingOptions = {
-    language: defaultLocale
+    language: intl.getDefaultLocale()
 };

@@ -1,6 +1,6 @@
-## Gobstones Authentication Server
+## Gobstones
 
-Thank you for contributing! Please take a moment to review our [**contributing guidelines**](https://github.com/gobstones/gobstones-gbb-parser/blob/master/CONTRIBUTING.md)
+Thank you for contributing! Please take a moment to review our [**contributing guidelines**](https://dev.gobstones.org/contribution-guidelines)
 to make the process easy and effective for everyone involved.
 
 **Please open an issue** before embarking on any significant pull request,
@@ -10,8 +10,8 @@ merged into the project.
 
 Before opening a pull request, please ensure:
 
-- [ ] You have followed our [**contributing guidelines**](https://github.com/gobstones/gobstones-gbb-parser/blob/master/CONTRIBUTING.md)
-- [ ] Double-check your branch is based on `dev` and targets `dev`
+- [ ] You have followed our [**contributing guidelines**](https://dev.gobstones.org/contribution-guidelines)
+- [ ] Double-check your branch is based on `main` and targets `main`
 - [ ] Pull request has tests (we are going for 100% coverage!)
 - [ ] Code is well-commented, linted and follows project conventions
 - [ ] Documentation is updated (if necessary)
@@ -21,4 +21,4 @@ Before opening a pull request, please ensure:
 Be kind to code reviewers, please try to keep pull requests as small and focused as possible :)
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project
-owners to license your work under the terms of the [MIT License](https://github.com/gobstones/gobstones-gbb-parser/blob/master/LICENSE.md).
+owners to license your work under the terms of the [MIT License](https://dev.gobstones.org/licence).

@@ -13,6 +13,7 @@ export interface Locale {
     stringifier: {
         errors: {
             HeadBoundaryExceeded: string;
+            InvalidHeadDefinition: string;
             InvalidSizeDefinition: string;
             InvalidCellDefinition: {
                 main: string;
@@ -24,6 +25,7 @@ export interface Locale {
                 width: string;
                 height: string;
             };
+            InvalidBoardDataDefinition;
         };
     };
     keywords: {

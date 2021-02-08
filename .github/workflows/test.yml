@@ -1,13 +1,11 @@
-name: Run Tests on Push
+name: test-on-commit
 on:
     push:
         branches:
-            - master
-            - dev
+            - main
     pull_request:
         branches:
-            - master
-            - dev
+            - main
 jobs:
     test:
         name: Run tests
@@ -15,7 +13,6 @@ jobs:
         strategy:
             matrix:
                 node-version:
-                    - 12.x
                     - 14.x
         steps:
             - uses: actions/checkout@v2
@@ -24,7 +21,6 @@ jobs:
               with:
                   node-version: "${{ matrix.node-version }}"
             - run: npm install
-            - run: npm run build
             - run: npm test
               env:
                   CI: true

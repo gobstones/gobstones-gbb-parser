@@ -26,6 +26,15 @@ export namespace GBBStringifyingErrors {
             Object.setPrototypeOf(this, HeadBoundaryExceeded.prototype);
         }
     }
+    export class InvalidHeadDefinition extends GBBStringifyingError {
+        public constructor() {
+            super(
+                'InvalidHeadDefinition',
+                intl.translate('stringifier.errors.InvalidHeadDefinition')
+            );
+            Object.setPrototypeOf(this, InvalidHeadDefinition.prototype);
+        }
+    }
     export class InvalidSizeDefinition extends GBBStringifyingError {
         public constructor(dimension: string, value: number) {
             super(
@@ -58,6 +67,7 @@ export namespace GBBStringifyingErrors {
             Object.setPrototypeOf(this, InvalidCellDefinition.prototype);
         }
     }
+    /* istanbul ignore next */
     export class InvalidBoardDefinition extends GBBStringifyingError {
         public constructor(encountered: number, declared: number, position?: number) {
             const values: any = {
@@ -76,6 +86,15 @@ export namespace GBBStringifyingErrors {
                 intl.translate('stringifier.errors.InvalidBoardDefinition.main') + secondaryMessage
             );
             Object.setPrototypeOf(this, InvalidBoardDefinition.prototype);
+        }
+    }
+    export class InvalidBoardDataDefinition extends GBBStringifyingError {
+        public constructor() {
+            super(
+                'InvalidBoardDataDefinition',
+                intl.translate('stringifier.errors.InvalidBoardDataDefinition')
+            );
+            Object.setPrototypeOf(this, InvalidBoardDataDefinition.prototype);
         }
     }
 }

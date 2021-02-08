@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Locale } from './translation';
+import { Locale } from './Locale';
 
 export const en: Locale = {
     parser: {
@@ -22,6 +22,8 @@ export const en: Locale = {
     },
     stringifier: {
         errors: {
+            InvalidHeadDefinition:
+                'LThe head position should be defined as a two element array where each element is a number.',
             HeadBoundaryExceeded:
                 'The head ${coordinate} value is invalid, as it falls outside of the board. You specified ${value}, but should be a value grater or equal than ${min} and lower than ${max}.',
             InvalidSizeDefinition:
@@ -31,8 +33,7 @@ export const en: Locale = {
                     "The definition of a cell should contain values for all 'a', 'n', 'r' and 'v', and nothing else. ",
                 missing:
                     'Yet you are lacking a value for the key ${key} at cell definition at position ${x}, ${y}.',
-                added:
-                    'Yet you are have additional keys for cell definition at position ${x}, ${y}.'
+                added: 'Yet you have additional keys for cell definition at position ${x}, ${y}.'
             },
             InvalidBoardDefinition: {
                 main:
@@ -41,7 +42,8 @@ export const en: Locale = {
                     'Yet the array has ${encountered} elements while the width stated ${declared} was required.',
                 height:
                     'Yet the element at position ${position} of the array has ${encountered} elements while the height stated ${declared} was required.'
-            }
+            },
+            InvalidBoardDataDefinition: 'The cellData or board array is defined incorrectly.'
         }
     },
     keywords: {

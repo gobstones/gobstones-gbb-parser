@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Locale } from './translation';
+import { Locale } from './Locale';
 
 export const es: Locale = {
     parser: {
@@ -22,6 +22,8 @@ export const es: Locale = {
     },
     stringifier: {
         errors: {
+            InvalidHeadDefinition:
+                'La posición del cabezal debe definirse como un arreglo de dos elementos, donde cada uno es un número.',
             HeadBoundaryExceeded:
                 'El cabezal en ${coordinate} tiene un valor inválido, ya que cae fuera del tablero. Especificaste ${value}, pero debe ser mayor o igual a ${min} o menor o igual a ${max}.',
             InvalidSizeDefinition:
@@ -40,7 +42,9 @@ export const es: Locale = {
                     'Sin embargo el arreglo tiene ${encountered} elementos, mientras que el ancho indica que ${declared} como requerido.',
                 height:
                     'Sin embargo el arreglo en la posición ${position} del arreglo tiene ${encountered} elementos, mientras que el ancho indica que ${declared} son requeridos.'
-            }
+            },
+            InvalidBoardDataDefinition:
+                'El atributo cellData o board está definido incorrectamente.'
         }
     },
     keywords: {

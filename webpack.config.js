@@ -7,7 +7,7 @@ const commonConfig = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'ts-loader',
+                loader: 'ts-loader',
                 exclude: /node_modules/
             }
         ]
@@ -26,7 +26,17 @@ const libraryTarget = Object.assign({}, commonConfig, {
         libraryTarget: 'umd',
         library: 'gobstones-gbb-parser',
         umdNamedDefine: true,
-        globalObject: 'typeof self !== \'undefined\' ? self : this'
+        globalObject: "typeof self !== 'undefined' ? self : this"
+    },
+
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+        fallback: {
+            // eslint-disable-next-line camelcase
+            child_process: false,
+            fs: false,
+            path: false
+        }
     }
 });
 
@@ -36,11 +46,9 @@ const cliTarget = Object.assign({}, commonConfig, {
     output: {
         filename: 'gobstones-gbb-parser.js',
         path: path.resolve(__dirname, 'dist'),
-        libraryTarget: 'commonjs'
+        libraryTarget: 'umd'
     },
-    plugins: [
-        new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true }),
-    ]
+    plugins: [new webpack.BannerPlugin({ banner: '#!/usr/bin/env node', raw: true })]
 });
 
 module.exports = [libraryTarget, cliTarget];

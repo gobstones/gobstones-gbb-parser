@@ -5,25 +5,30 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Run in Development Mode",
             "type": "node",
             "request": "launch",
-            "name": "Debug",
-            "program": "${workspaceRoot}/dist/app.js",
-            "smartStep": true,
-            "outFiles": [
-                "../dist/**/*.js"
+            "args": ["${relativeFile}"],
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register"
             ],
-            "protocol": "inspector",
-            "env": {
-                "NODE_ENV": "production"
-            }
+            "cwd": "${workspaceRoot}",
+            "protocol": "inspector"
         },
         {
+            "name": "vscode-jest-tests",
             "type": "node",
-            "request": "attach",
-            "name": "Nodemon Debug",
-            "port": 9229,
-            "restart": true
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            "args": [
+                "--runInBand"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true
         }
     ]
 }

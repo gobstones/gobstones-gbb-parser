@@ -48,6 +48,7 @@ module.exports = {
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/no-parameter-properties": "off",
+        "@typescript-eslint/no-shadow": ["error"],
         "@typescript-eslint/no-unused-vars": ["error", {
             "vars": "all",
             "args": "none",
@@ -123,12 +124,6 @@ module.exports = {
         "no-return-assign": "error",
         "no-return-await": "error",
         "no-self-compare": "error",
-        "no-shadow": [
-            "error",
-            {
-                "hoist": "all"
-            }
-        ],
         "no-throw-literal": "error",
         "no-undef-init": "error",
         "no-underscore-dangle": "error",
@@ -149,14 +144,6 @@ module.exports = {
         ],
         "radix": "error",
         "require-await": "error",
-        "space-before-function-paren": [
-            "error",
-            {
-                "anonymous": "never",
-                "asyncArrow": "always",
-                "named": "never"
-            }
-        ],
         "spaced-comment": "error",
         "use-isnan": "error",
         "valid-typeof": "error",

@@ -1,5 +1,12 @@
 {
-  "recommendations": [
-    "karyfoundation.nearley"
-  ]
-}
+    "recommendations": [
+      "streetsidesoftware.code-spell-checker",
+      "editorconfig.editorconfig",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "amatiasq.sort-imports",
+      "orta.vscode-jest",
+      "christian-kohler.path-intellisense",
+      "karyfoundation.nearley"
+    ]
+  }

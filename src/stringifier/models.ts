@@ -1,4 +1,4 @@
-import { LocaleName, defaultLocale } from '../translations';
+import { intl } from '../translations';
 
 export type WhiteOption = 'space' | 'tab';
 export type WhiteWithNewlineOption = 'space' | 'tab' | 'newline';
@@ -8,7 +8,7 @@ export type WhiteWithNewlineOption = 'space' | 'tab' | 'newline';
  */
 export interface GBBStringifyingOptions {
     /** The error message output language */
-    language: LocaleName;
+    language: string;
     /** Different separator options */
     separators: {
         /** The separator to use between each language keyword.
@@ -40,7 +40,7 @@ export interface GBBStringifyingOptions {
 }
 
 export const defaultGBBStringifyingOptions: GBBStringifyingOptions = {
-    language: defaultLocale,
+    language: intl.getDefaultLocale(),
     separators: {
         betweenKeywords: 'newline',
         betweenColors: 'space',
@@ -61,13 +61,3 @@ export const stringFromSeparator = (
         tab: '\t',
         space: ' '
     }[separatorOption]);
-
-export const getColorNameFor = (colorKey: string, useFullColorName: boolean = false): string =>
-    !useFullColorName
-        ? colorKey
-        : {
-              a: 'Azul',
-              n: 'Negro',
-              r: 'Rojo',
-              v: 'Verde'
-          }[colorKey];

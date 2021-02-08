@@ -76,30 +76,28 @@ Some additional considerations include:
 * There cannot be two definitions for the same color in the same cell
 * There can be any amount of blank lines at the end of the file
 
-## Gobstones Board JSON Output/Input
+## Gobstones Board Output/Input
 
-The parsed result produced/consumed by the parser is the same format produced/consumed by the
-[gobstones-interpreter](https://github.com/gobstones/gobstones-interpreter). It's a
-TypeScript/JavaScript object that has the Board type. where:
+The parsed result produced/consumed by the parser is a Board as the one exported by
+[gobstones-core](https://github.com/gobstones/gobstones-core). We recommend to check it's
+API in order to better understand the object and all it's associated methods. To
+sum up, it's a TypeScript/JavaScript object that has the Board type. where:
 
 ```typescript
 type Board = {
-    format: string;     // should always be "GBB/1.0"
-    width: number;      // width of the board
-    height: number;     // height of the board
-    head: CellLocation; // array [x, y] with the position of the head 
-    board: BoardInfo;   // array of <width> elements,
-                        // each of which is an array of <height> elements,
-                        // each of which is a cell, of the form {"a": na, "n": nn, "r": nr, "v": nv}
-                        // in such a way that:
-                        //   * board[x][y].a = number of blue  stones at (x, y)
-                        //   * board[x][y].n = number of black stones at (x, y)
-                        //   * board[x][y].r = number of red   stones at (x, y)
-                        //   * board[x][y].v = number of green stones at (x, y)
+    width: number;          // width of the board
+    height: number;         // height of the board
+    head: [number, number]; // array [x, y] with the position of the head
+    getColumns(): Cell[][]; // array of <width> elements,
+                            // each of which is an array of <height> elements,
+                            // each of which is a Cell
 };
-type CellLocation = [number, number];
-type BoardInfo = CellInfo[][];
-type CellInfo = { a: number; n: number; r: number; v: number };
+type Cell = {
+    x: number;              // The cell's x location
+    y: number;              // The cell's x location
+    getStonesOf(color: Color): number;   // Returns the amount of stones
+                            // for the given color.
+}
 ```
 
 Parsing may also produce errors which live in the GBBParsingErrors namespace (when parsing) or GBBStringifyingErrors (when stringifying).
@@ -154,7 +152,7 @@ yarn add @gobstones/gobstones-gbb-parser
 Import `GBB` from the module and parse a string defining a Gobstones Board.
 
 ```typescript
-import { GBB } from 'gobstones-gbb-parser';
+import { GBB } from '@gobstones/gobstones-gbb-parser';
 
 const myBoard = "GBB/1.0 size 3 4 cell 2 1 a 1 cell 1 2 n 1 r 3 cell 1 3 r 2 a 1 head 1 1";
 
@@ -168,19 +166,34 @@ You could also pass the object representing a Board and produce a GBB string
 by calling `stringify`, as follows:
 
 ```typescript
-import { GBB } from 'gobstones-gbb-parser';
+import { GBB } from '@gobstones/gobstones-gbb-parser';
+import { Board, Color } from '@gobstones/gobstones-core';
 
-const myBoardObject = {
-    format: 'GBB/1.0',
-    width:  3,
-    height: 4,
-    head:   [1, 1],
-    board:  [
-        [{a:0,n:0,r:0,v:0}, {a:0,n:0,r:0,v:0}, {a:0,n:0,r:0,v:0}, {a:0,n:0,r:0,v:0}],
-        [{a:0,n:0,r:0,v:0}, {a:0,n:0,r:0,v:0}, {a:0,n:1,r:3,v:0}, {a:1,n:0,r:2,v:0}],
-        [{a:0,n:0,r:0,v:0}, {a:1,n:0,r:0,v:0}, {a:0,n:0,r:0,v:0}, {a:0,n:0,r:0,v:0}],
+const myBoard = new Board(3, 4, [1, 1], [
+    {x: 2, y: 1, [Color.Black]: 1, [Color.Red]: 3},
+    {x: 3, y: 1, [Color.Blue]: 1, [Color.Red]: 3},
+]);
+
+const GBBBoardString = GBB.stringify(myBoard);
+
+console.log(GBBBoardString)
+```
+
+Additionally, you can pass an object that it's not a board, but has all it's properties,
+this is the expected behavior when working from the CLI:
+
+```typescript
+import { GBB } from '@gobstones/gobstones-gbb-parser';
+
+const myBoard = {
+    x: 3,
+    y: 4,
+    head: [1, 1],
+    cellData: [
+        {x: 2, y: 1, [Color.Black]: 1, [Color.Red]: 3},
+        {x: 3, y: 1, [Color.Blue]: 1, [Color.Red]: 3},
     ]
-}
+};
 
 const GBBBoardString = GBB.stringify(myBoard);
 
@@ -318,5 +331,5 @@ Other files include the definition of types for Board, CellInfo and other
 utilities, as well as errors for parse and stringify.
 
 Everything is then wrapped up by the `src/index.js` file that exports
-all defined types and a `GBB` object which the aforementioned functions 
+all defined types and a `GBB` object which the aforementioned functions
 `parse` and `stringify`, types, and defaults.

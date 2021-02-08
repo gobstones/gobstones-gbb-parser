@@ -1,0 +1,46 @@
+{
+    "entryPoints": [
+        "./src/index.ts"
+    ],
+    "out": "docs",
+    "includes": "./src",
+    "exclude": [
+        "**/node_modules/**",
+        "**/*.test.ts",
+        "**/**/index.ts"
+    ],
+    "externalPattern": "**/node_modules/**",
+    "theme": "./node_modules/typedoc-neo-theme/bin/default",
+    "includeVersion": true,
+    "categorizeByGroup": true,
+    "excludeExternals": true,
+    "excludePrivate": false,
+    "hideGenerator": true,
+    "disableSources": true,
+    "links": [
+        {
+            "label": "Repository",
+            "url": "https://github.com/gobstones/gobstones-gbb-parser"
+        },
+        {
+            "label": "Gobstones Docs",
+            "url": "https://dev.gobstones.org"
+        },
+        {
+            "label": "Contribution Guidelines",
+            "url": "https://dev.gobstones.org/contribution-guidelines"
+        }
+    ],
+    "outline": [
+        {
+            "Public Modules": {
+                "GBB": "index"
+            },
+            "Internal Modules": {
+                "Tokenizer": "grammar_index.",
+                "Parser": "parser_parser",
+                "Stringifier": "stringifier_stringifier"
+            }
+        }
+    ]
+}

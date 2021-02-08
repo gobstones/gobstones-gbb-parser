@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2015",
         "rootDir": "./src",
+        "outDir": "./dist",
         "esModuleInterop": true,
         "allowJs": true,
         "sourceMap": true,
@@ -9,11 +10,15 @@
         "declaration": true,
         "declarationMap": true,
         "declarationDir": "dist/typings",
+        "moduleResolution": "node",
         "resolveJsonModule": true,
         "stripInternal": true
 
     },
     "include": [
         "./src/**/*"
+    ],
+    "exclude": [
+        "./dist/**/*"
     ]
 }

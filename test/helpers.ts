@@ -1,12 +1,21 @@
-import { GBB, Board, CellLocation, BoardInfo, CellInfo } from '../src/index';
+import { GBB, GBBStringifyingOptions } from '../src/index';
 
-export const p = (str: string) => () => GBB.parse(str);
-export const u = (board: Board) => GBB.stringify(board);
+import { Board } from '@gobstones/gobstones-core';
+import { GBBParsingOptions } from '../src/parser';
+import { Token } from '../src/grammar';
 
+export const t = (str: string): Token[] => GBB.tokenize(str);
+export const p = (str: string, options?: Partial<GBBParsingOptions>): Board =>
+    GBB.parse(str, options);
+export const s = (board: Board | any, options?: Partial<GBBStringifyingOptions>): string =>
+    GBB.stringify(board, options);
+
+/*
 const emptyCell = () => {
     return { a: 0, n: 0, r: 0, v: 0 };
 };
-
+*/
+/*
 export const buildBoardOf = (
     width: number,
     height: number,
@@ -24,3 +33,4 @@ export const buildBoardOf = (
     }
     return board;
 };
+*/
