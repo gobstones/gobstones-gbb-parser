@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+if [ -z "$CI" ]
+then
+    echo "Husky: Running pre-push hooks.";
+    echo "";
+    echo "Run git with --no-verify to skip hooks"
+    npm run build;
+    npm run test;
+fi

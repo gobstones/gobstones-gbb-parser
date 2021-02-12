@@ -9,6 +9,10 @@
 # tests
 test/*
 jest.config.js
+coverage
+
+# docs
+docs
 
 # Building Configuration Files
 webpack.config.js

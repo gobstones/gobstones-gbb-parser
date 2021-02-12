@@ -48,7 +48,12 @@ module.exports = {
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/no-parameter-properties": "off",
-        "@typescript-eslint/no-shadow": ["error"],
+        "@typescript-eslint/no-shadow": [
+            "error",
+            {
+                "hoist": "all"
+            }
+        ],
         "@typescript-eslint/no-unused-vars": ["error", {
             "vars": "all",
             "args": "none",
