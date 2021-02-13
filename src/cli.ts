@@ -26,12 +26,13 @@ cli({
         help: 'cli.descriptions.help',
         tool: 'cli.descriptions.tool',
         language: 'cli.descriptions.language',
+        languageError: 'cli.errors.language',
         version: 'cli.descriptions.version'
     }
 })
     .command('parse [gbbString]', 'cli.descriptions.parse', (cmd) => {
         cmd.input('cli.descriptions.in', 'cli.errors.file')
-            .output('cli.descriptions.in')
+            .output('cli.descriptions.out')
             .option('pretty', 'cli.descriptions.pretty')
             .action((app, _, opts: CLIArguments) => {
                 app.outputHelpOnNoArgs();
@@ -44,7 +45,7 @@ cli({
     })
     .command('stringify [jsonBoard]', 'cli.descriptions.stringify', (cmd) => {
         cmd.input('cli.descriptions.in', 'cli.errors.file')
-            .output('cli.descriptions.in')
+            .output('cli.descriptions.out')
             .option('pretty', 'cli.descriptions.pretty')
             .action((app, _, opts: CLIArguments) => {
                 app.outputHelpOnNoArgs();

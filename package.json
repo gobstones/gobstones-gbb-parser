@@ -54,6 +54,6 @@
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "@gobstones/gobstones-core": "^0.2.2"
+    "@gobstones/gobstones-core": "^0.2.3"
   }
 }
