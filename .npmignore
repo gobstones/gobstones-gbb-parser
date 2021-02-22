@@ -15,6 +15,7 @@ coverage
 docs
 
 # Building Configuration Files
+rollup.config.js
 webpack.config.js
 tsconfig.json
 package-scripts.js

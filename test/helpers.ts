@@ -3,7 +3,9 @@ import { GBB, GBBStringifyingOptions } from '../src/index';
 import { Board } from '@gobstones/gobstones-core';
 import { GBBParsingOptions } from '../src/parser';
 import { Token } from '../src/grammar';
+import { describe } from '@jest/globals';
 
+export const given = describe;
 export const t = (str: string): Token[] => GBB.tokenize(str);
 export const p = (str: string, options?: Partial<GBBParsingOptions>): Board =>
     GBB.parse(str, options);

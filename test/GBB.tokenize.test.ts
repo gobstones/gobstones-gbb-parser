@@ -1,7 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-
-import { given } from 'jest-rspec-utils';
-import { t } from './helpers';
+import { given, t } from './helpers';
 
 describe('GBB.tokenize', () => {
     given('a valid grammar', () => {

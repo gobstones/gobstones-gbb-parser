@@ -1,7 +1,7 @@
 # Import the custom lexer and load it into Nearley
 @{%
 const lexer = require('./gbb-lexer.js');
-const h = require('./nearly-helper.js');
+const h = require('./nearley-helper.js');
 %}
 
 @lexer lexer

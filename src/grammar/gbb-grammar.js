@@ -4,7 +4,7 @@
 function id(x) { return x[0]; }
 
 const lexer = require('./gbb-lexer.js');
-const h = require('./nearly-helper.js');
+const h = require('./nearley-helper.js');
 var grammar = {
     Lexer: lexer,
     ParserRules: [

@@ -1,23 +1,17 @@
 /* eslint-disable */
-/**
- * Windows: Please do not use trailing comma as windows will fail with token error
- */
 const {
     concurrent,
     series,
     nps,
     run,
-    webpack,
+    rollup,
     typedoc,
     jest,
     prettier,
     eslint,
     serve,
-    rename,
     remove,
-    copy,
-    chmod,
-    onchange
+    copy
 } = require('./nps-tooling');
 
 const paths = {
@@ -32,51 +26,98 @@ function nearleyCompiler(path, output) {
 
 module.exports = {
     scripts: {
-        default: nps('dev'),
-        /*
-         * Run the index in development mode
-         */
+        default: 'nps help',
+
         dev: {
-            script: series(nps('generate.parser'), run('./src/index.ts'), nps('clean.parser')),
-            description: 'Run the index in development mode',
+            script: series(
+                nps('clean.parser'),
+                nps('generate.parser'),
+                run({ file: './src/index.ts' })
+            ),
+            description: 'Run "index.ts" in development mode',
             watch: {
-                script: onchange('./src/**/*.ts', run('./src/index.ts'))
+                script: series(
+                    nps('clean.parser'),
+                    nps('generate.parser'),
+                    run({ file: './src/index.ts', watch: './src/**/*.ts' })
+                ),
+                description: 'Run "index.ts" in development mode and watch for changes'
             }
         },
-        /*
-         * Build the application for deployment
-         */
+
         build: {
             script: series(
                 nps('clean.dist'),
+                nps('clean.parser'),
                 nps('generate.parser'),
-                webpack(),
-                rename('dist/gobstones-gbb-parser.js', 'dist/gobstones-gbb-parser'),
-                chmod('+x', 'dist/gobstones-gbb-parser'),
-                nps('clean.parser')
+                rollup()
             ),
-            description: 'Build the application into the dist folder'
+            description: 'Build the application into "dist" folder',
+            watch: {
+                script: series(
+                    nps('clean.dist'),
+                    nps('clean.parser'),
+                    nps('generate.parser'),
+                    rollup({ watch: './src/**/*' })
+                ),
+                description: 'Build the application into "dist" folder and watch for changes'
+            }
         },
-        /*
-         * Run the tests
-         */
+
         test: {
-            script: series(nps('clean.coverage'), nps('lint'), nps('generate.parser'), jest()),
-            description: 'Run the index in development mode',
+            script: series(nps('clean.coverage'), nps('lint'), jest({ coverage: true })),
+            description: 'Run the tests, including linting',
+            watch: {
+                script: series(jest({ coverage: true, watch: true })),
+                description: 'Run the tests with no linting, and wait for changes'
+            },
             serve: {
                 script: series(
                     nps('clean.coverage'),
-                    nps('lint'),
-                    nps('generate.parser'),
-                    jest('--coverageThreshold "{}"'),
+                    jest({ coverage: true, noThreshold: true }),
                     serve('./coverage')
                 ),
-                description: 'Serve the coverage report produced by jest'
+                description:
+                    'Run the tests, including linting, and serve the coverage reports in HTML',
+                watch: {
+                    script: series(
+                        nps('clean.coverage'),
+                        concurrent(
+                            jest({ coverage: true, noThreshold: true, watch: true }),
+                            serve('./coverage')
+                        )
+                    ),
+                    description:
+                        'Run the tests with no linting, and wait for changes, and serve the coverage report'
+                }
             }
         },
-        /**
-         * Nearley
-         */
+
+        doc: {
+            script: series(
+                nps('clean.docs'),
+                typedoc(),
+                copy({ src: './docs/index.html', dest: './docs/globals.html' })
+            ),
+            description: 'Run Typedoc and generate docs',
+            watch: {
+                script: series(nps('doc'), typedoc({ watch: true })),
+                description: 'Run Typedoc and generate docs and watch for changes.'
+            },
+            serve: {
+                script: series(nps('doc'), serve('./docs')),
+                description: 'Run Typedoc and generate docs, then serve the docs as HTML',
+                watch: {
+                    script: series(
+                        nps('doc'),
+                        concurrent(typedoc({ watch: true }), serve('./docs'))
+                    ),
+                    description:
+                        'Run Typedoc and generate docs and watch for changes while serving the docs as HTML'
+                }
+            }
+        },
+
         generate: {
             parser: {
                 script: nearleyCompiler(paths.grammarFile, paths.grammarOutput),
@@ -99,70 +140,52 @@ module.exports = {
                 silent: true
             }
         },
-        /**
-         * Helpers
-         */
+
         clean: {
+            script: series(
+                nps('clean.parser'),
+                nps('clean.dist'),
+                nps('clean.docs'),
+                nps('clean.coverage')
+            ),
+            description: 'Remove all automatically generated files and folders',
             parser: {
-                script: remove(paths.grammarOutput),
-                description: 'Delete the generated grammar file',
-                hiddenFromHelp: true,
+                script: remove({ files: './src/grammar/gbb-grammar.js' }),
+                description: 'Delete the generated parser',
                 silent: true
             },
             dist: {
-                script: remove('./dist'),
+                script: remove({ files: './dist' }),
                 description: 'Delete the dist folder',
-                hiddenFromHelp: true,
                 silent: true
             },
             docs: {
-                script: remove('./docs'),
+                script: remove({ files: './docs' }),
                 description: 'Delete the docs folder',
-                hiddenFromHelp: true,
                 silent: true
             },
             coverage: {
-                script: remove('./coverage'),
+                script: remove({ files: './coverage' }),
                 description: 'Delete the coverage folder',
-                hiddenFromHelp: true,
                 silent: true
             }
         },
-        prettify: {
-            script: prettier('./src/**/*.ts'),
-            description: 'Run Prettier on all the files',
-            hiddenFromHelp: true
-        },
+
         lint: {
-            script: eslint('./src'),
-            description: 'Run ESLint on all the files',
-            hiddenFromHelp: true,
+            script: series(eslint({ files: './src' }), eslint({ files: './test' })),
+            description: 'Run ESLint on all the files (src and tests)',
             fix: {
-                script: series(eslint('./src', true), eslint('./test', true)),
-                description: 'Run ESLint on all the files with --fix',
-                hiddenFromHelp: true
+                script: series(
+                    eslint({ files: './src', fix: true }),
+                    eslint({ files: './test', fix: true })
+                ),
+                description: 'Run ESLint on all the files (src and tests) with --fix option'
             }
         },
-        doc: {
-            script: series(
-                nps('clean.docs'),
-                nps('generate.parser'),
-                typedoc(),
-                copy('./docs/index.html', './docs/globals.html')
-            ),
-            description: 'Run Typedoc and generate docs',
-            hiddenFromHelp: true,
-            serve: {
-                script: series('nps doc', serve('./docs')),
-                description: 'Generate and serve the docs as static files',
-                hiddenFromHelp: true
-            },
-            watch: {
-                script: series(
-                    nps('clean.docs'),
-                    concurrent(serve('./docs'), onchange('./src/**/*.ts', nps('doc')))
-                )
-            }
+
+        prettify: {
+            script: prettier({ files: './src/**/*.ts' }),
+            description: 'Run Prettier on all the files, writing the results'
         }
     }
 };

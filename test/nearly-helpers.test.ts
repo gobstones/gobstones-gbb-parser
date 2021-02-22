@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import helpers from '../src/grammar/nearly-helper';
+import helpers from '../src/grammar/nearley-helper';
 
 describe('nearly-helpers', () => {
     describe('id', () => {

@@ -2,6 +2,11 @@
 
 A Gobstones Board Parser and Stringifier.
 
+[![Licence](https://img.shields.io/github/license/gobstones/gobstones-gbb-parser?style=plastic&label=License&logo=open-source-initiative&logoColor=white&color=olivegreen)](https://github.com/gobstones/gobstones-gbb-parser/blob/main/LICENSE) [![Version](https://img.shields.io/github/package-json/v/gobstones/gobstones-gbb-parser?style=plastic&label=Version&logo=git-lfs&logoColor=white&color=crimson)](https://www.npmjs.com/package/@gobstones/gobstones-gbb-parser) [![API Docs](https://img.shields.io/github/package-json/homepage/gobstones/gobstones-gbb-parser?color=blue&label=API%20Docs&logo=gitbook&logoColor=white&style=plastic)](https://gobstones.github.io/gobstones-gbb-parser)
+
+![GitHub Workflow Tests](https://img.shields.io/github/workflow/status/gobstones/gobstones-gbb-parser/test-on-commit?style=plastic&label=Tests&logo=github-actions&logoColor=white) ![GitHub Workflow Build](https://img.shields.io/github/workflow/status/gobstones/gobstones-gbb-parser/build-on-commit?style=plastic&label=Build&logo=github-actions&logoColor=white)
+
+
 ## Gobstones Board Language Specification
 
 The Gobstones Board Language is a declarative language for specifying boards for the Gobstones Language.

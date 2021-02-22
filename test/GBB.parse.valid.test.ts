@@ -1,9 +1,8 @@
 import { Board, Color } from '@gobstones/gobstones-core';
 import { describe, expect, it } from '@jest/globals';
+import { given, p } from './helpers';
 
 import { GBBParsingErrors } from '../src/index';
-import { given } from 'jest-rspec-utils';
-import { p } from './helpers';
 
 describe('GBB.parse', () => {
     given('a valid grammar', () => {

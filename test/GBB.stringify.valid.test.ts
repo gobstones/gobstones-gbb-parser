@@ -1,9 +1,8 @@
 import { Board, Color } from '@gobstones/gobstones-core';
 import { describe, expect, it } from '@jest/globals';
+import { given, s } from './helpers';
 
 import { GBBStringifyingErrors } from '../src/index';
-import { given } from 'jest-rspec-utils';
-import { s } from './helpers';
 
 describe('GBB.stringify', () => {
     given('A constructed GBB', () => {
