@@ -1,0 +1,393 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@gobstones/gobstones-gbb-parser - v0.4.2</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<ul class="results-priority" style="display:none">
+					</ul>
+					<a href="index.html" class="title">@gobstones/gobstones-gbb-parser - v0.4.2</a>
+					&emsp;<a href="https://github.com/gobstones/gobstones-gbb-parser" class="title">Repository</a>
+					&emsp;<a href="https://dev.gobstones.org" class="title">Gobstones Docs</a>
+					&emsp;<a href="https://dev.gobstones.org/contribution-guidelines" class="title">Contribution Guidelines</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+			</ul>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-3 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation outline primary">
+				<a style="margin-left:0em" href="globals.html">Globals</a>
+				<ul style="display:none">
+					{&quot;Public Modules&quot;:{&quot;GBB&quot;:&quot;index&quot;},&quot;Internal Modules&quot;:{&quot;Tokenizer&quot;:&quot;grammar_index.&quot;,&quot;Parser&quot;:&quot;parser_parser&quot;,&quot;Stringifier&quot;:&quot;stringifier_stringifier&quot;}}
+				</ul>
+			</nav>
+		</div>
+		<div class="col-7 offset-3 col-content">
+			<h1>Project @gobstones/gobstones-gbb-parser - v0.4.2</h1>
+			<div class="tsd-panel tsd-typography">
+				<a href="#gobstones-gbb-parser" id="gobstones-gbb-parser" style="color: inherit; text-decoration: none;">
+					<h1>gobstones-gbb-parser</h1>
+				</a>
+				<p>A Gobstones Board Parser and Stringifier.</p>
+				<p><a href="https://github.com/gobstones/gobstones-gbb-parser/blob/main/LICENSE"><img src="https://img.shields.io/github/license/gobstones/gobstones-gbb-parser?style=plastic&label=License&logo=open-source-initiative&logoColor=white&color=olivegreen" alt="Licence"></a> <a href="https://www.npmjs.com/package/@gobstones/gobstones-gbb-parser"><img src="https://img.shields.io/github/package-json/v/gobstones/gobstones-gbb-parser?style=plastic&label=Version&logo=git-lfs&logoColor=white&color=crimson" alt="Version"></a> <a href="https://gobstones.github.io/gobstones-gbb-parser"><img src="https://img.shields.io/github/package-json/homepage/gobstones/gobstones-gbb-parser?color=blue&label=API%20Docs&logo=gitbook&logoColor=white&style=plastic" alt="API Docs"></a></p>
+				<p><img src="https://img.shields.io/github/workflow/status/gobstones/gobstones-gbb-parser/test-on-commit?style=plastic&label=Tests&logo=github-actions&logoColor=white" alt="GitHub Workflow Tests"> <img src="https://img.shields.io/github/workflow/status/gobstones/gobstones-gbb-parser/build-on-commit?style=plastic&label=Build&logo=github-actions&logoColor=white" alt="GitHub Workflow Build"></p>
+				<a href="#gobstones-board-language-specification" id="gobstones-board-language-specification" style="color: inherit; text-decoration: none;">
+					<h2>Gobstones Board Language Specification</h2>
+				</a>
+				<p>The Gobstones Board Language is a declarative language for specifying boards for the Gobstones Language.
+				The language follows the following EBNF spec:</p>
+				<pre><code><span style="color: #001080">Main</span><span style="color: #000000"> -&gt;    </span><span style="color: #001080">FormatDeclaration</span><span style="color: #000000"> </span><span style="color: #001080">__</span>
+<span style="color: #000000">        </span><span style="color: #001080">SizeDeclaration</span><span style="color: #000000"> </span><span style="color: #001080">__</span>
+<span style="color: #000000">        (</span><span style="color: #001080">CellDeclarationList</span><span style="color: #000000"> </span><span style="color: #001080">__</span><span style="color: #000000">)?</span>
+<span style="color: #000000">        (</span><span style="color: #001080">HeadDeclaration</span><span style="color: #000000">)?</span>
+<span style="color: #000000">        </span><span style="color: #001080">__</span><span style="color: #000000">?</span>
+
+<span style="color: #001080">FormatDeclaration</span><span style="color: #000000">   -&gt;  </span><span style="color: #A31515">&quot;GBB/1.0&quot;</span>
+<span style="color: #000000">                    |   </span><span style="color: #A31515">&quot;GBB&quot;</span>
+<span style="color: #000000">                    |   </span><span style="color: #A31515">&quot;gbb&quot;</span>
+
+<span style="color: #001080">SizeDeclaration</span><span style="color: #000000">     -&gt;  </span><span style="color: #A31515">&quot;size&quot;</span><span style="color: #000000"> </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span><span style="color: #000000"> </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span>
+
+<span style="color: #001080">HeadDeclaration</span><span style="color: #000000">     -&gt;  </span><span style="color: #A31515">&quot;head&quot;</span><span style="color: #000000"> </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span><span style="color: #000000"> </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span>
+
+<span style="color: #001080">CellDeclarationList</span><span style="color: #000000"> -&gt;  </span><span style="color: #001080">CellDeclaration</span>
+<span style="color: #000000">                    |   </span><span style="color: #001080">CellDeclaration</span><span style="color: #000000"> </span><span style="color: #001080">__</span><span style="color: #000000"> </span><span style="color: #001080">CellDeclarationList</span>
+
+<span style="color: #001080">CellDeclaration</span><span style="color: #000000">     -&gt;  </span><span style="color: #A31515">&quot;cell&quot;</span><span style="color: #000000"> </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span><span style="color: #000000"> </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span><span style="color: #000000"> </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #001080">StonesDefinition</span>
+
+<span style="color: #001080">StonesDefinition</span><span style="color: #000000">    -&gt;  </span><span style="color: #001080">SingleStoneDefinition</span>
+<span style="color: #000000">                    |   </span><span style="color: #001080">SingleStoneDefinition</span><span style="color: #000000"> </span><span style="color: #001080">__</span><span style="color: #000000"> </span><span style="color: #001080">StonesDefinition</span>
+
+<span style="color: #001080">SingleStoneDefinition</span><span style="color: #000000">   -&gt;  (</span><span style="color: #A31515">&quot;Azul&quot;</span><span style="color: #000000">|</span><span style="color: #A31515">&quot;A&quot;</span><span style="color: #000000">|</span><span style="color: #A31515">&quot;a&quot;</span><span style="color: #000000">)  </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span>
+<span style="color: #000000">                        |   (</span><span style="color: #A31515">&quot;Negro&quot;</span><span style="color: #000000">|</span><span style="color: #A31515">&quot;N&quot;</span><span style="color: #000000">|</span><span style="color: #A31515">&quot;n&quot;</span><span style="color: #000000">) </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span>
+<span style="color: #000000">                        |   (</span><span style="color: #A31515">&quot;Rojo&quot;</span><span style="color: #000000">|</span><span style="color: #A31515">&quot;R&quot;</span><span style="color: #000000">|</span><span style="color: #A31515">&quot;r&quot;</span><span style="color: #000000">)  </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span>
+<span style="color: #000000">                        |   (</span><span style="color: #A31515">&quot;Verde&quot;</span><span style="color: #000000">|</span><span style="color: #A31515">&quot;V&quot;</span><span style="color: #000000">|</span><span style="color: #A31515">&quot;v&quot;</span><span style="color: #000000">) </span><span style="color: #001080">_</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span>
+
+<span style="color: #267F99">Number</span><span style="color: #000000"> -&gt; [</span><span style="color: #098658">0</span><span style="color: #000000">-</span><span style="color: #098658">9</span><span style="color: #000000">]+</span>
+<span style="color: #001080">_</span><span style="color: #000000"> -&gt; [ \</span><span style="color: #001080">t</span><span style="color: #000000">]+</span>
+<span style="color: #001080">__</span><span style="color: #000000"> -&gt; [ \</span><span style="color: #001080">t</span><span style="color: #000000">\</span><span style="color: #001080">n</span><span style="color: #000000">\</span><span style="color: #001080">v</span><span style="color: #000000">\</span><span style="color: #001080">f</span><span style="color: #000000">]+</span>
+</code></pre>
+				<p>Here is a simple example of a Gobstones Board definition:</p>
+				<pre><code><span style="color: #0070C1">GBB</span><span style="color: #000000">/</span><span style="color: #098658">1.0</span>
+<span style="color: #001080">size</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000"> </span><span style="color: #098658">4</span>
+<span style="color: #001080">cell</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #098658">1</span>
+<span style="color: #001080">cell</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> </span><span style="color: #001080">n</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">r</span><span style="color: #000000"> </span><span style="color: #098658">3</span>
+<span style="color: #001080">cell</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">r</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> </span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #098658">1</span>
+<span style="color: #001080">head</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #098658">1</span>
+</code></pre>
+				<p>So to break it down in simple words. A Gobstones Board Definition:</p>
+				<ul>
+					<li>Must start with the format declaration at first line (&quot;GBB/1.0&quot;)</li>
+					<li>Must be followed by a size declaration of the form &quot;size <width> <height>&quot;</li>
+					<li>May contain any number of cell declarations &quot;cell <x-coordinate> <y-coordinate>&quot; followed by stone amount definitions in the form &quot;<color> <amount>&quot;</li>
+					<li>May end with a head declaration in the form &quot;head <x-coordinate> <y-coordinate>&quot;.</li>
+				</ul>
+				<p>Where:</p>
+				<ul>
+					<li><width> is a positive non zero number.</li>
+					<li><height> is a positive non zero number.</li>
+					<li><x-coordinate> is a positive zero based coordinate such that <x-coordinate> &lt; <width></li>
+					<li><y-coordinate> is a positive zero based coordinate such that <y-coordinate> &lt; <height></li>
+					<li><amount> is a positive or zero number</li>
+					<li><color> is any of:<ul>
+								<li>&quot;Azul&quot; (which may also be refered as &quot;A&quot; or &quot;a&quot;)</li>
+								<li>&quot;Negro&quot; (which may also be refered as &quot;N&quot; or &quot;n&quot;)</li>
+								<li>&quot;Rojo&quot; (which may also be refered as &quot;R&quot; or &quot;r&quot;)</li>
+								<li>&quot;Verde&quot; (which may also be refered as &quot;V&quot; or &quot;v&quot;)</li>
+							</ul>
+					</li>
+					<li>Blanks are important in the language, and numbers and keywords should be separated by a space or tab.</li>
+					<li>Each line definition must be separated by a blank, whether is a space, a tab or line feed character.</li>
+				</ul>
+				<p>Some additional considerations include:</p>
+				<ul>
+					<li>There cannot be two cell definitions for the same cell.</li>
+					<li>There cannot be two definitions for the same color in the same cell</li>
+					<li>There can be any amount of blank lines at the end of the file</li>
+				</ul>
+				<a href="#gobstones-board-outputinput" id="gobstones-board-outputinput" style="color: inherit; text-decoration: none;">
+					<h2>Gobstones Board Output/Input</h2>
+				</a>
+				<p>The parsed result produced/consumed by the parser is a Board as the one exported by
+					<a href="https://github.com/gobstones/gobstones-core">gobstones-core</a>. We recommend to check it&#39;s
+					API in order to better understand the object and all it&#39;s associated methods. To
+				sum up, it&#39;s a TypeScript/JavaScript object that has the Board type. where:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">Board</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">width</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;          </span><span style="color: #008000">// width of the board</span>
+<span style="color: #000000">    </span><span style="color: #001080">height</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;         </span><span style="color: #008000">// height of the board</span>
+<span style="color: #000000">    </span><span style="color: #001080">head</span><span style="color: #000000">: [</span><span style="color: #267F99">number</span><span style="color: #000000">, </span><span style="color: #267F99">number</span><span style="color: #000000">]; </span><span style="color: #008000">// array [x, y] with the position of the head</span>
+<span style="color: #000000">    </span><span style="color: #795E26">getColumns</span><span style="color: #000000">(): </span><span style="color: #267F99">Cell</span><span style="color: #000000">[][]; </span><span style="color: #008000">// array of &lt;width&gt; elements,</span>
+<span style="color: #000000">                            </span><span style="color: #008000">// each of which is an array of &lt;height&gt; elements,</span>
+<span style="color: #000000">                            </span><span style="color: #008000">// each of which is a Cell</span>
+<span style="color: #000000">};</span>
+<span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">Cell</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">x</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;              </span><span style="color: #008000">// The cell&#039;s x location</span>
+<span style="color: #000000">    </span><span style="color: #001080">y</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;              </span><span style="color: #008000">// The cell&#039;s x location</span>
+<span style="color: #000000">    </span><span style="color: #795E26">getStonesOf</span><span style="color: #000000">(</span><span style="color: #001080">color</span><span style="color: #000000">: </span><span style="color: #267F99">Color</span><span style="color: #000000">): </span><span style="color: #267F99">number</span><span style="color: #000000">;   </span><span style="color: #008000">// Returns the amount of stones</span>
+<span style="color: #000000">                            </span><span style="color: #008000">// for the given color.</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>Parsing may also produce errors which live in the GBBParsingErrors namespace (when parsing) or GBBStringifyingErrors (when stringifying).</p>
+				<p>When parsing a given string for a GBB definition you may find:</p>
+				<pre><code class="language-typescript"><span style="color: #001080">GBBParsingErrors</span><span style="color: #000000">.</span><span style="color: #001080">UnexpectedToken</span><span style="color: #000000">           </span><span style="color: #008000">// If an invalid token is found in the string,</span>
+<span style="color: #001080">GBBParsingErrors</span><span style="color: #000000">.</span><span style="color: #001080">UnexpectedEOF</span><span style="color: #000000">             </span><span style="color: #008000">// If the EOF is reached but a valid board could not yet be produced.</span>
+<span style="color: #001080">GBBParsingErrors</span><span style="color: #000000">.</span><span style="color: #001080">InvalidSizeDefinition</span><span style="color: #000000">     </span><span style="color: #008000">// If the size is zero in any of their components.</span>
+<span style="color: #001080">GBBParsingErrors</span><span style="color: #000000">.</span><span style="color: #001080">HeadBoundaryExceeded</span><span style="color: #000000">      </span><span style="color: #008000">// If the head position exceeds the size of the board.</span>
+<span style="color: #001080">GBBParsingErrors</span><span style="color: #000000">.</span><span style="color: #001080">DuplicatedCellDefinition</span><span style="color: #000000">  </span><span style="color: #008000">// If there is more than one definition for the same cell.</span>
+<span style="color: #001080">GBBParsingErrors</span><span style="color: #000000">.</span><span style="color: #001080">DuplicatedColorDefinition</span><span style="color: #000000"> </span><span style="color: #008000">// If there is more than one definition for the same color in any given cell.</span>
+<span style="color: #001080">GBBParsingErrors</span><span style="color: #000000">.</span><span style="color: #001080">CellBoundaryExceeded</span><span style="color: #000000">     </span><span style="color: #008000">// If for any given cell declaration the coordinates exceeds the size of the board.</span>
+</code></pre>
+				<p>These all inherit from <code>GBBParsingErrors.GBBParsingError</code>.</p>
+				<p>Unparsing on the other hand may produce similar errors if the provided
+				object contains errors that makes it an invalid board. These include:</p>
+				<pre><code class="language-typescript"><span style="color: #001080">GBBStringifyingErrors</span><span style="color: #000000">.</span><span style="color: #001080">InvalidSizeDefinition</span><span style="color: #000000">       </span><span style="color: #008000">// If the size is zero or negative in any of their components.</span>
+<span style="color: #001080">GBBStringifyingErrors</span><span style="color: #000000">.</span><span style="color: #001080">HeadBoundaryExceeded</span><span style="color: #000000">        </span><span style="color: #008000">// If the head position exceeds the size of the board.</span>
+<span style="color: #001080">GBBStringifyingErrors</span><span style="color: #000000">.</span><span style="color: #001080">InvalidCellDefinition</span><span style="color: #000000">       </span><span style="color: #008000">// If the data for the stones in a cell are incomplete or contains more info than needed.</span>
+<span style="color: #001080">GBBStringifyingErrors</span><span style="color: #000000">.</span><span style="color: #001080">InvalidBoardDefinition</span><span style="color: #000000">      </span><span style="color: #008000">// If the board information provided does not match width and height of the board.</span>
+</code></pre>
+				<p>This all inherit from <code>GBBStringifyingErrors.GBBStringifyingError</code>.</p>
+				<a href="#translations" id="translations" style="color: inherit; text-decoration: none;">
+					<h2>Translations</h2>
+				</a>
+				<p>Error messages are translated to the user desired language, although this does not change the language
+				definition in any way. See below on how to translate error messages to a given language.</p>
+				<a href="#installing" id="installing" style="color: inherit; text-decoration: none;">
+					<h2>Installing</h2>
+				</a>
+				<p>To install run</p>
+				<pre><code class="language-sh"><span style="color: #000000">npm install @gobstones/gobstones-gbb-parser</span>
+</code></pre>
+				<p>or if you are using yarn.</p>
+				<pre><code class="language-sh"><span style="color: #000000">yarn add @gobstones/gobstones-gbb-parser</span>
+</code></pre>
+				<a href="#usage-as-a-module" id="usage-as-a-module" style="color: inherit; text-decoration: none;">
+					<h2>Usage as a module</h2>
+				</a>
+				<p>Import <code>GBB</code> from the module and parse a string defining a Gobstones Board.</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">GBB</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@gobstones/gobstones-gbb-parser&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">myBoard</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;GBB/1.0 size 3 4 cell 2 1 a 1 cell 1 2 n 1 r 3 cell 1 3 r 2 a 1 head 1 1&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">BoardObject</span><span style="color: #000000"> = </span><span style="color: #0070C1">GBB</span><span style="color: #000000">.</span><span style="color: #795E26">parse</span><span style="color: #000000">(</span><span style="color: #001080">myBoard</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">BoardObject</span><span style="color: #000000">)</span>
+</code></pre>
+				<p>The output of the parser is a JSON output with the aforementioned spec.
+					You could also pass the object representing a Board and produce a GBB string
+				by calling <code>stringify</code>, as follows:</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">GBB</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@gobstones/gobstones-gbb-parser&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Board</span><span style="color: #000000">, </span><span style="color: #001080">Color</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@gobstones/gobstones-core&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">myBoard</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Board</span><span style="color: #000000">(</span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">, [</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000">], [</span>
+<span style="color: #000000">    {</span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">[Color.Black]:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">[Color.Red]:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">},</span>
+<span style="color: #000000">    {</span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">[Color.Blue]:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">[Color.Red]:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">},</span>
+<span style="color: #000000">]);</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">GBBBoardString</span><span style="color: #000000"> = </span><span style="color: #0070C1">GBB</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">(</span><span style="color: #001080">myBoard</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">GBBBoardString</span><span style="color: #000000">)</span>
+</code></pre>
+				<p>Additionally, you can pass an object that it&#39;s not a board, but has all it&#39;s properties,
+				this is the expected behavior when working from the CLI:</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">GBB</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@gobstones/gobstones-gbb-parser&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">myBoard</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">4</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">head:</span><span style="color: #000000"> [</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000">],</span>
+<span style="color: #000000">    </span><span style="color: #001080">cellData:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">        {</span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">[Color.Black]:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">[Color.Red]:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">},</span>
+<span style="color: #000000">        {</span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">[Color.Blue]:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">[Color.Red]:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">},</span>
+<span style="color: #000000">    ]</span>
+<span style="color: #000000">};</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">GBBBoardString</span><span style="color: #000000"> = </span><span style="color: #0070C1">GBB</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">(</span><span style="color: #001080">myBoard</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">GBBBoardString</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#passing-options" id="passing-options" style="color: inherit; text-decoration: none;">
+					<h4>Passing options</h4>
+				</a>
+				<p>You can pass an object of type <code>GBBParsingOptions</code> to <code>parse</code> to specify additional options as a second argument.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">GBBParsingOptions</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #008000">/** The error message output language */</span>
+<span style="color: #000000">    </span><span style="color: #001080">language</span><span style="color: #000000">: </span><span style="color: #267F99">Locale</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>Whereas for <code>stringify</code> you can pass a <code>GBBStringifyingOptions</code> as a second argument.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">GBBStringifyingOptions</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">/** The error message output language */</span>
+<span style="color: #000000">    </span><span style="color: #001080">language</span><span style="color: #000000">: </span><span style="color: #267F99">Locale</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #008000">/** Different separator options */</span>
+<span style="color: #000000">    </span><span style="color: #001080">separators</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #008000">/** The separator to use between each language keyword.</span>
+<span style="color: #008000">         * Defaults to &#039;newline&#039; */</span>
+<span style="color: #000000">        </span><span style="color: #001080">betweenKeywords</span><span style="color: #000000">: </span><span style="color: #267F99">WhiteWithNewlineOption</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #008000">/** The separator to use between different color names in the same line.</span>
+<span style="color: #008000">         * Defaults to &#039;space&#039; */</span>
+<span style="color: #000000">        </span><span style="color: #001080">betweenColors</span><span style="color: #000000">: </span><span style="color: #267F99">WhiteOption</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #008000">/** The separator to use between a color name and the number that follows.</span>
+<span style="color: #008000">         * Defaults to &#039;tab&#039; */</span>
+<span style="color: #000000">        </span><span style="color: #001080">colorKeyToNumber</span><span style="color: #000000">: </span><span style="color: #267F99">WhiteOption</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #008000">/** The separator to use between different elements of a coordinate.</span>
+<span style="color: #008000">         * Defaults to &#039;space&#039; */</span>
+<span style="color: #000000">        </span><span style="color: #001080">betweenCoordinates</span><span style="color: #000000">: </span><span style="color: #267F99">WhiteOption</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #008000">/** The separator to use between the keyword and the first element of a coordinate.</span>
+<span style="color: #008000">         * Defaults to &#039;space&#039; */</span>
+<span style="color: #000000">        </span><span style="color: #001080">keywordToCoordinates</span><span style="color: #000000">: </span><span style="color: #267F99">WhiteOption</span><span style="color: #000000">;</span>
+<span style="color: #000000">    };</span>
+<span style="color: #000000">    </span><span style="color: #008000">/** Use the full color name in output. Defaults to &#039;true&#039; */</span>
+<span style="color: #000000">    </span><span style="color: #001080">useFullColorNames</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #008000">/** Maintain the color key for colors which have zero stone for cells</span>
+<span style="color: #008000">     * which have at least one stone. Defaults to &#039;false&#039; */</span>
+<span style="color: #000000">    </span><span style="color: #001080">declareColorsWithZeroStones</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #008000">/** Maintain the color key for colors which have zero stone for cells</span>
+<span style="color: #008000">     * even for cells that have no stones at all. This indeed produces a</span>
+<span style="color: #008000">     * &#039;cell&#039; line for each cell of the board, which is not desirable for</span>
+<span style="color: #008000">     * large board. Defaults to &#039;false&#039; */</span>
+<span style="color: #000000">    </span><span style="color: #001080">declareColorsWithAllZeroStones</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">WhiteOption</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;space&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;tab&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">WhiteWithNewlineOption</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;space&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;tab&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;newline&#039;</span><span style="color: #000000">;</span>
+</code></pre>
+				<p>where you can configure the produced output string when unparsing, but specifying different separator symbols,
+				choose to use full color names or short names, and maintain or remove empty color names and cells.</p>
+				<p>Available locales are currently <code>en</code> and <code>es</code>, and defaults to &#39;en&#39;.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">Locale</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;en&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;es&#039;</span><span style="color: #000000">; </span><span style="color: #008000">// Defaults to &#039;en&#039;.</span>
+</code></pre>
+				<a href="#usage-as-cli" id="usage-as-cli" style="color: inherit; text-decoration: none;">
+					<h2>Usage as CLI</h2>
+				</a>
+				<p>This module installs a <code>gobstones-gbb-parser</code> command in the NPM bin folder. You can use the parser from the
+				command line. If you want to use it from anywhere on your machine, install the module globally with:</p>
+				<pre><code class="language-sh"><span style="color: #000000">npm install --global @gobstones/gobstones-gbb-parser</span>
+</code></pre>
+				<p>Then you can call the parser with the version option to check the currently installed version.</p>
+				<pre><code><span style="color: #001080">gobstones</span><span style="color: #000000">-</span><span style="color: #001080">gbb</span><span style="color: #000000">-</span><span style="color: #001080">parser</span><span style="color: #000000"> --</span><span style="color: #001080">version</span>
+</code></pre>
+				<p>Use help to chek available commands.</p>
+				<pre><code><span style="color: #001080">gobstones</span><span style="color: #000000">-</span><span style="color: #001080">gbb</span><span style="color: #000000">-</span><span style="color: #001080">parser</span><span style="color: #000000"> --</span><span style="color: #001080">help</span>
+</code></pre>
+				<a href="#modifying-and-compiling" id="modifying-and-compiling" style="color: inherit; text-decoration: none;">
+					<h2>Modifying and compiling</h2>
+				</a>
+				<p>If you want to modify the code, just download the project with git</p>
+				<pre><code><span style="color: #001080">git</span><span style="color: #000000"> </span><span style="color: #001080">clone</span><span style="color: #000000"> https:</span><span style="color: #008000">//github.com/gobstones/gobstones-gbb-parser</span>
+<span style="color: #001080">cd</span><span style="color: #000000"> </span><span style="color: #001080">gobstones</span><span style="color: #000000">-</span><span style="color: #001080">gbb</span><span style="color: #000000">-</span><span style="color: #001080">parser</span>
+</code></pre>
+				<p>You may compile the project with</p>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">start</span><span style="color: #000000"> </span><span style="color: #001080">build</span>
+</code></pre>
+				<p>which produces the output in the <code>dist</code> directory.</p>
+				<p>If you want to run the tests, run</p>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">test</span>
+</code></pre>
+				<a href="#minimal-source-code-guide" id="minimal-source-code-guide" style="color: inherit; text-decoration: none;">
+					<h2>Minimal source code guide</h2>
+				</a>
+				<p>The project structre is as follows:</p>
+				<pre><code><span style="color: #001080">src</span>
+<span style="color: #000000"> |- </span><span style="color: #001080">grammar</span><span style="color: #000000">       </span><span style="color: #008000">// Lexer and Parser definitions</span>
+<span style="color: #000000"> |- </span><span style="color: #001080">parser</span><span style="color: #000000">        </span><span style="color: #008000">// Parsing functions, models and error definitions</span>
+<span style="color: #000000"> |- </span><span style="color: #001080">stringifier</span><span style="color: #000000">   </span><span style="color: #008000">// Stringify functions, models and error definitions</span>
+<span style="color: #000000"> |- </span><span style="color: #001080">helpers</span><span style="color: #000000">       </span><span style="color: #008000">// Helper functions and definitions</span>
+<span style="color: #000000"> |- </span><span style="color: #001080">translations</span><span style="color: #000000">  </span><span style="color: #008000">// JSON files containing translation strings</span>
+<span style="color: #000000"> |- </span><span style="color: #001080">models</span><span style="color: #000000">.</span><span style="color: #001080">ts</span><span style="color: #000000">     </span><span style="color: #008000">// The exported types for the module</span>
+<span style="color: #000000"> |- </span><span style="color: #001080">models</span><span style="color: #000000">.</span><span style="color: #001080">ts</span><span style="color: #000000">     </span><span style="color: #008000">// Some defaults the module exports</span>
+<span style="color: #000000"> |- </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span><span style="color: #000000">      </span><span style="color: #008000">// The main exported module, including the GBB object</span>
+<span style="color: #000000"> |- </span><span style="color: #001080">cli</span><span style="color: #000000">.</span><span style="color: #001080">ts</span><span style="color: #000000">        </span><span style="color: #008000">// The CLI definition</span>
+</code></pre>
+				<p>The project uses mainly a lexer/tokenizer written using <a href="https://github.com/no-context/moo">moo</a> that you can
+					find in <code>src/grammar/gbb-lexer.js</code> and a parser generated by <a href="https://nearley.js.org">nearley</a> parser, whose spec
+					you may find in <code>src/grammar/gbb-grammar.ne</code>. The code in that file is mostly self explanatory and follows the
+				EBNF spec of the language, with additional code used by nearley to produce an intermediate output.</p>
+				<p>The output of the grammar produces an intermediate AST which is managed by <code>src/parser/parser.ts</code>.
+					This files exports the <code>parse</code> function, that validates the consistency of data and produces a ready for
+				interpreter consumption object.</p>
+				<p>On the other hand <code>src/stringifier/stringifier.ts</code> exports the <code>stringify</code> function, that takes an object and
+				produces a GBB format string.</p>
+				<p>Other files include the definition of types for Board, CellInfo and other
+				utilities, as well as errors for parse and stringify.</p>
+				<p>Everything is then wrapped up by the <code>src/index.js</code> file that exports
+					all defined types and a <code>GBB</code> object which the aforementioned functions
+				<code>parse</code> and <code>stringify</code>, types, and defaults.</p>
+			</div>
+			<!--{&quot;options&quot;:&quot;/Users/alanrodas/Proyectos/gobstones-server/gobstones-gbb-parser&quot;,&quot;tsconfig&quot;:&quot;/Users/alanrodas/Proyectos/gobstones-server/gobstones-gbb-parser&quot;,&quot;entryPoints&quot;:[&quot;./src/index.ts&quot;],&quot;exclude&quot;:[&quot;**/node_modules/**&quot;,&quot;**/*.test.ts&quot;,&quot;**/**/index.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:true,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:true,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:true,&quot;includes&quot;:&quot;./src&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;&quot;,&quot;includeVersion&quot;:true,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:true,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;listInvalidSymbolLinks&quot;:false,&quot;links&quot;:[{&quot;label&quot;:&quot;Repository&quot;,&quot;url&quot;:&quot;https://github.com/gobstones/gobstones-gbb-parser&quot;},{&quot;label&quot;:&quot;Gobstones Docs&quot;,&quot;url&quot;:&quot;https://dev.gobstones.org&quot;},{&quot;label&quot;:&quot;Contribution Guidelines&quot;,&quot;url&quot;:&quot;https://dev.gobstones.org/contribution-guidelines&quot;}],&quot;outline&quot;:[{&quot;Public Modules&quot;:{&quot;GBB&quot;:&quot;index&quot;},&quot;Internal Modules&quot;:{&quot;Tokenizer&quot;:&quot;grammar_index.&quot;,&quot;Parser&quot;:&quot;parser_parser&quot;,&quot;Stringifier&quot;:&quot;stringifier_stringifier&quot;}}]}-->
+		</div>
+		<div class="col-2 col-menu secondary-menu">
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/gbbparseroptions.html" class="tsd-kind-icon">GBBParser<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/gbbstringifyingoptions.html" class="tsd-kind-icon">GBBStringifying<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias root">
+						<a href="modules.html#whiteoption" class="tsd-kind-icon">White<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-type-alias root">
+						<a href="modules.html#whitewithnewlineoption" class="tsd-kind-icon">White<wbr>With<wbr>Newline<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-variable root">
+						<a href="modules.html#gbb" class="tsd-kind-icon">GBB</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -192,7 +192,7 @@ const nameForColor = (color: Color, fullName: boolean): string => {
  */
 const convertToBoardIfSimpleJSON = (board: any): Board => {
     let cellData: any;
-    if (typeof board === 'object' && board instanceof Board) {
+    if (board.isBoard || (typeof board === 'object' && board instanceof Board)) {
         return board;
     } else {
         expect(board.width as number)
